@@ -1,131 +1,49 @@
 # fp02 - Formulário de Compras e Notas
 
-Este repositório contém o ficheiro **form.html** e o script **lista.php**, responsável por processar
-a lista de compras e as notas enviadas pelo utilizador.
+## Português (Portugal)
+
+### 📘 Descrição Geral
+O projeto **fp02** é um formulário HTML que recolhe dados para duas funcionalidades:  
+uma **Lista de Compras** e uma **Lista de Notas**.  
+Os dados são enviados para o ficheiro PHP **`lista.php`**, que os processa e apresenta o resultado.
 
 ---
 
-## 📌 Estrutura do Projeto
+### 🔧 Funcionalidades Principais
 
-- **form.html**  
-  Formulário HTML que recolhe:
-  - 5 itens de compras (`item1` a `item5`)
-  - 5 notas numéricas (`nota1` a `nota5`) com validação entre 0 e 20  
-- **lista.php**  
-  Script PHP que recebe os dados via método **POST**, apresenta a lista de compras
-  e calcula a média das notas.
+#### 1. Lista de Compras
+- Recolhe 5 itens de texto (`item1` a `item5`).
+- Os itens são enviados para o PHP que os apresenta em lista.
 
----
+#### 2. Lista de Notas
+- Recolhe 5 valores numéricos (`nota1` a `nota5`).
+- Validação HTML: `min="0"` e `max="20"`.
+- O ficheiro PHP:
+  - apresenta as notas,
+  - calcula a média,
+  - exibe o resultado final.
 
-## 🧮 Funções do `lista.php`
-
-- Receber os valores enviados pelo formulário.
-- Listar os 5 itens de compras.
-- Listar as 5 notas submetidas.
-- Calcular a média das notas.
-- Apresentar o resultado final ao utilizador.
+#### 3. Submissão de Formulário
+- Método: **POST**
+- Destino: **`lista.php`**
 
 ---
 
-## 📄 Código Completo de `lista.php`
+## 📂 Estrutura do Projeto
 
+| Ficheiro     | Descrição |
+|--------------|-----------|
+| `form.html`  | Formulário HTML com campos para 5 itens e 5 notas |
+| `lista.php`  | Script PHP que lê dados usando `$_POST`, imprime listas e calcula a média |
+
+---
+
+## 🧠 Explicação do Funcionamento do `lista.php`
+
+### 📥 1. Receção dos dados
 ```php
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Resultados</title>
-</head>
-<body>
-    <?php
-        $item1 = $_POST["item1"];
-        $item2 = $_POST["item2"];
-        $item3 = $_POST["item3"];
-        $item4 = $_POST["item4"];
-        $item5 = $_POST["item5"];
-
-        echo "<h4>Lista de Compras.</h4>";
-        echo "<ul>";
-        $lista = array($item1, $item2, $item3, $item4, $item5);
-        foreach($lista as $compras){
-            echo "<li>$compras</li>";
-        }
-        echo "</ul>";
-
-    
-        $turma = ["Ana" => 16, "João" => 17, "Maria" => 18, "Kévin" => 19, "Carlos" => 20];
-
-        echo "<h2>Tabela da Turma</h2>";
-        echo "<table border='2' width='150px'>";
-            echo "<tr>";
-            echo "<th>Nome</th>";
-            echo "<th>Idade</th>";
-            echo "</tr>";
-
-            foreach($turma as $nome => $idade){
-            echo "<tr>";
-            echo "<td>" . $nome . "</td>";
-            echo "<td>" . $idade . "</td>";
-            echo "</tr>";
-            }
-        echo "</table>";
-        
-        $nota1 = $_POST["nota1"];
-        $nota2 = $_POST["nota2"];
-        $nota3 = $_POST["nota3"];
-        $nota4 = $_POST["nota4"];
-        $nota5 = $_POST["nota5"];
-
-        echo "<h4>Lista de Notas.</h4>";
-        echo "<ul>";
-        $notas = array($nota1, $nota2, $nota3, $nota4, $nota5);
-
-        
-        $notafinal = array_sum($notas) / count($notas);
-
-        
-        foreach($notas as $nota_individual){
-            echo "<li>Nota: " . $nota_individual . "</li>";
-        }
-        echo "</ul>";
-
-       
-        if($notafinal < 10){
-            $resultado = "Reprovado";
-        }elseif($notafinal <= 13){ 
-            $resultado = "Satisfaz";
-        }elseif($notafinal <= 17){
-            $resultado = "Bom";
-        }elseif($notafinal <= 20){
-            $resultado = "Excelente";
-        }else{
-            $resultado = "Inválido";
-        }
-
-        echo "<p>A sua nota é " . number_format($notafinal, 2) . ", classificação: $resultado.</p>";
-
-       
-        echo "<h2>Resultado em Tabela</h2>";
-
-        echo "<table border='2' width='150px'>";
-        echo "<tr>";
-        echo "<th>Média</th>";
-        echo "<th>Resultado</th>";
-        echo "</tr>";
-
-        echo "<tr>";
-        echo "<td>" . number_format($notafinal, 2) . "</td>";
-        echo "<td>" . $resultado . "</td>";
-        echo "</tr>";
-        echo "</table>";
-
-    ?>
-</body>
-</html>
-```
-
----
+$item1 = $_POST['item1'];
+$nota1 = $_POST['nota1'];
 
 ### ✔️ Nota
 Este README.md foi montado automaticamente a partir do ficheiro PHP que forneceste.
